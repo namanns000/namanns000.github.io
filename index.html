@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html>
+<style>
+* {
+   box-sizing: border-box;
+}
+h1 {
+   text-align: center;
+}
+.outer-grid {
+   display: flex;
+   flex-wrap: wrap;
+   padding: 0 4px;
+}
+.inner-grid {
+   flex: 25%;
+   max-width: 25%;
+   padding: 0 4px;
+}
+.inner-grid img {
+   margin-top: 8px;
+   width: 100%;
+   padding: 10px;
+}
+@media screen and (max-width: 800px) {
+   .inner-grid {
+      flex: 50%;
+      max-width: 50%;
+   }
+}
+@media screen and (max-width: 600px) {
+   .inner-grid {
+      flex: 100%;
+      max-width: 100%;
+   }
+}
+</style>
+
 <head>
 <title>NAMAN</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
-
-
-
 </head>
+
 <body>
+<h1>Images</h1>
 
-<h>under development PAGE CONTENT</h>
-
+<div class="outer-grid">
+<div class="inner-grid">
+<img src="/image/1.jpg"/>
+</div>
+  
+<div class="inner-grid">
+  <img src="/image/2.jpg"/>
+</div>
+  
+<div class="inner-grid">
+  <img src="/image/3.jpg"/>
+</div>
+</div>
 </body>
 </html>
-
