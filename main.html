@@ -1,1 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JAI TECH | Future Tech</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
+        /* Custom Fonts */
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-space { font-family: 'Space Grotesk', sans-serif; }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0ea5e9; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7; 
+        }
+
+        /* Animations */
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 10px rgba(6, 182, 212, 0.2); }
+            50% { box-shadow: 0 0 25px rgba(6, 182, 212, 0.6); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .neon-border {
+            box-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.3);
+            border-color: rgba(6, 182, 212, 0.5);
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background: linear-gradient(to right, #22d3ee, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white font-space overflow-x-hidden relative">
+
+    <!-- Canvas Background -->
+    <canvas id="neural-canvas" class="fixed top-0 left-0 w-full h-full -z-10 opacity-50"></canvas>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 start-0 border-b border-white/10 bg-slate-950/70 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between p-4">
+            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse group">
+                <div class="p-2 border border-cyan-500 rounded-lg group-hover:bg-cyan-500/10 transition-colors">
+                    <i data-lucide="cpu" class="text-cyan-400 w-6 h-6"></i>
+                </div>
+                <span class="self-center text-2xl font-orbitron font-bold whitespace-nowrap tracking-wider">JAI TECH</span>
+            </a>
+            
+            <!-- Mobile Menu Button -->
+            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-400 rounded-lg md:hidden hover:bg-white/10 focus:outline-none" aria-controls="navbar-default" aria-expanded="false" id="menu-btn">
+                <span class="sr-only">Open main menu</span>
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+
+            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-white/10 rounded-lg bg-slate-900/50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-transparent">
+                    <li>
+                        <a href="#home" class="block py-2 px-3 text-white bg-cyan-600 rounded md:bg-transparent md:text-cyan-400 md:p-0" aria-current="page">Home</a>
+                    </li>
+                    <li>
+                        <a href="#services" class="block py-2 px-3 text-gray-300 rounded hover:bg-white/10 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 transition-colors">Products</a>
+                    </li>
+                    <li>
+                        <a href="#tech" class="block py-2 px-3 text-gray-300 rounded hover:bg-white/10 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 transition-colors">Technology</a>
+                    </li>
+                    <li>
+                        <a href="#contact" class="block py-2 px-3 text-gray-300 rounded hover:bg-white/10 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 transition-colors">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 relative">
+        <!-- Decorative Glows -->
+        <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-[100px] -z-10"></div>
+        <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-fuchsia-500/20 rounded-full blur-[100px] -z-10"></div>
+
+        <div class="py-8 px-4 mx-auto max-w-screen-xl text-center lg:py-16 lg:px-12 z-10">
+            <div class="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm text-cyan-300 bg-cyan-900/30 rounded-full border border-cyan-500/30 hover:bg-cyan-900/50 transition-colors cursor-pointer animate-float">
+                <span class="text-xs bg-cyan-600 rounded-full text-white px-4 py-1.5 mr-3 font-orbitron">NEW</span> <span class="text-sm font-medium">Season sale is here</span> 
+                <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+            </div>
+            <h1 class="mb-4 text-5xl font-extrabold tracking-tight leading-none text-white md:text-6xl lg:text-8xl font-orbitron">
+                ARCHITECTS OF <br>
+                <span class="text-gradient">THE UNKNOWN</span>
+            </h1>
+            <p class="mb-8 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48">
+                We bridge the gap between imagination and reality. Utilizing neural interfaces to build the next generation of digital apps and ai tech that dents the space time.
+            </p>
+            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                <a href="#services" class="inline-flex justify-center items-center py-3 px-8 text-base font-bold text-center text-slate-900 rounded-lg bg-cyan-400 hover:bg-cyan-300 focus:ring-4 focus:ring-cyan-300/50 transition-all shadow-[0_0_20px_rgba(34,211,238,0.5)]">
+                    Initiate Protocol
+                    <i data-lucide="arrow-right" class="ml-2 -mr-1 w-5 h-5"></i>
+                </a>
+                <a href="#tech" class="inline-flex justify-center items-center py-3 px-8 text-base font-medium text-center text-white rounded-lg border border-white/20 hover:bg-white/10 focus:ring-4 focus:ring-gray-700 transition-all backdrop-blur-sm">
+                    <i data-lucide="play-circle" class="mr-2 w-5 h-5"></i>
+                    View Demo
+                </a>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-2 gap-8 md:grid-cols-4 border-t border-white/10 pt-8 mt-12">
+                <div>
+                    <div class="text-3xl font-bold text-white font-orbitron">100%</div>
+                    <div class="text-gray-500 uppercase text-xs tracking-widest mt-1">Uptime</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white font-orbitron">1M+</div>
+                    <div class="text-gray-500 uppercase text-xs tracking-widest mt-1">happy coustemers</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white font-orbitron">24/7</div>
+                    <div class="text-gray-500 uppercase text-xs tracking-widest mt-1">Support</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold text-white font-orbitron">1</div>
+                    <div class="text-gray-500 uppercase text-xs tracking-widest mt-1">presence in states</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="bg-slate-1000 py-20 relative">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 relative z-10">
+            <div class="max-w-screen-md mb-8 lg:mb-16">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-white font-orbitron">Retail <span class="text-cyan-400">Presence</span></h2>
+                <p class="text-gray-400 sm:text-xl">Deploying advanced human resource to meet human needs in retail via our showrooms and online presence on Amazon and Flipkart.</p>
+            </div>
+            <div class="space-y-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0">
+                
+                <!-- Service 1 -->
+                <div class="p-8 rounded-2xl bg-slate-900/50 border border-white/5 backdrop-blur-sm transition-all duration-300 card-hover group">
+                    <div class="flex justify-center items-center mb-4 w-14 h-14 rounded-full bg-cyan-900/30 lg:h-16 lg:w-16 border border-cyan-500/30 group-hover:bg-cyan-500/20 group-hover:scale-110 transition-all">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-cyan-400 lg:w-8 lg:h-8"></i>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">JAI TECH Bargadwa</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Our first showroom at Bargadwa Chauraha, Gorakhpur.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="p-8 rounded-2xl bg-slate-900/50 border border-white/5 backdrop-blur-sm transition-all duration-300 card-hover group">
+                    <div class="flex justify-center items-center mb-4 w-14 h-14 rounded-full bg-fuchsia-900/30 lg:h-16 lg:w-16 border border-fuchsia-500/30 group-hover:bg-fuchsia-500/20 group-hover:scale-110 transition-all">
+                        <i data-lucide="brain-circuit" class="w-6 h-6 text-fuchsia-400 lg:w-8 lg:h-8"></i>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-white group-hover:text-fuchsia-400 transition-colors">JAI TECH GODOWN</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Godown to meet online and offline storage needs.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="p-8 rounded-2xl bg-slate-900/50 border border-white/5 backdrop-blur-sm transition-all duration-300 card-hover group">
+                    <div class="flex justify-center items-center mb-4 w-14 h-14 rounded-full bg-blue-900/30 lg:h-16 lg:w-16 border border-blue-500/30 group-hover:bg-blue-500/20 group-hover:scale-110 transition-all">
+                        <i data-lucide="database-zap" class="w-6 h-6 text-blue-400 lg:w-8 lg:h-8"></i>
+                    </div>
+                    <h3 class="mb-2 text-xl font-bold text-white group-hover:text-blue-400 transition-colors">JAI TECH online</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Amazon, flipkart and our own in house develpoed online marketplace.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Spec Section -->
+    <section id="tech" class="bg-slate-1000 border-y border-white/5 overflow-hidden">
+        <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-8">
+            <div class="font-light text-gray-400 sm:text-lg">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold text-white font-orbitron">Technology <span class="text-fuchsia-500">Projects</span></h2>
+                <p class="mb-4">Built on the edge of technology.</p>
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-cyan-400 mb-1">lossless music player</div>
+                        <div class="text-xs uppercase tracking-wider">FLAC music app</div>
+                    </div>
+                    <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-fuchsia-400 mb-1">phyiscs.ai</div>
+                        <div class="text-xs uppercase tracking-wider">ai that is master of physics in our universe</div>
+                    </div>
+                     <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-fuchsia-400 mb-1">messaging app</div>
+                        <div class="text-xs uppercase tracking-wider">Fully encrypted end to end control</div>
+                    </div>
+                     <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-cyan-400 mb-1">doctor.ai</div>
+                        <div class="text-xs uppercase tracking-wider">replacing doctors and their workload</div>
+                    </div>
+                    <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-cyan-400 mb-1">retro games app</div>
+                        <div class="text-xs uppercase tracking-wider">retro games in their originality</div>
+                    </div>
+                     <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-fuchsia-400 mb-1">evaluator.ai</div>
+                        <div class="text-xs uppercase tracking-wider">ai that evaluates property value on both market and circle rates</div>
+                    </div>
+                      <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-fuchsia-400 mb-1">help app</div>
+                        <div class="text-xs uppercase tracking-wider">all in one social media </div>
+                    </div>
+                      <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-cyan-400 mb-1">shorts.ai</div>
+                        <div class="text-xs uppercase tracking-wider">ai that evaluates property vale both market and circle rate</div>
+                    </div>
+                      <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-cyan-400 mb-1">review.ai</div>
+                        <div class="text-xs uppercase tracking-wider">ai that reviews produsts and make a list of trending products and services</div>
+                    </div>
+                     <div class="border border-white/10 p-4 rounded bg-slate-900/50">
+                        <div class="text-2xl font-bold text-fuchsia-400 mb-1">upcoming</div>
+                        <div class="text-xs uppercase tracking-wider"> ...</div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4 mt-8 lg:mt-0 relative">
+                 <div class="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-fuchsia-500/20 blur-[60px] rounded-full -z-10"></div>
+                <img class="w-full rounded-lg border border-white/10 shadow-2xl hover:scale-105 transition-transform duration-500" src="https://static.vecteezy.com/system/resources/thumbnails/021/517/705/small/music-player-ui-design-with-buttons-track-and-title-illustration-isolated-on-white-audio-player-interface-black-and-white-style-vector.jpg" alt="Cyberpunk Server">
+                <img class="w-full mt-4 lg:mt-10 rounded-lg border border-white/10 shadow-2xl hover:scale-105 transition-transform duration-500" src="https://cdn.dribbble.com/userupload/28439276/file/original-bde1961ba63c011daa7b191f48e9009f.png " alt="Futuristic Interface">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="bg-slate-1000 relative py-24">
+        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 relative z-10">
+            <div class="mx-auto max-w-screen-sm text-center">
+                <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-white font-orbitron">Initialize <span class="text-cyan-400">Connection</span></h2>
+                <p class="mb-6 font-light text-gray-400 md:text-lg">Ready to upgrade your reality? Send a transmission to our team.</p>
+                <form action="#" class="space-y-4 text-left p-6 border border-white/10 rounded-2xl bg-slate-900/80 backdrop-blur-xl shadow-2xl" onsubmit="event.preventDefault(); showToast();">
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Identity (Email)</label>
+                        <input type="email" id="email" class="shadow-sm bg-slate-950 border border-gray-700 text-white text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 placeholder-gray-600" placeholder="user@jaitech.com" required>
+                    </div>
+                    <div>
+                        <label for="subject" class="block mb-2 text-sm font-medium text-gray-300">Subject</label>
+                        <input type="text" id="subject" class="shadow-sm bg-slate-950 border border-gray-700 text-white text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 placeholder-gray-600" placeholder="Project Inquiry" required>
+                    </div>
+                    <div class="sm:col-span-2">
+                        <label for="message" class="block mb-2 text-sm font-medium text-gray-300">Transmission</label>
+                        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-white bg-slate-950 rounded-lg shadow-sm border border-gray-700 focus:ring-cyan-500 focus:border-cyan-500 placeholder-gray-600" placeholder="Enter your message..."></textarea>
+                    </div>
+                    <button type="submit" class="py-3 px-5 w-full text-sm font-medium text-center text-slate-950 font-bold rounded-lg bg-gradient-to-r from-cyan-400 to-cyan-600 hover:from-cyan-300 hover:to-cyan-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 transition-all">Send Transmission</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="p-4 bg-slate-950 md:p-8 lg:p-10 border-t border-white/10">
+        <div class="mx-auto max-w-screen-xl text-center">
+            <a href="#" class="flex justify-center items-center text-2xl font-semibold text-white font-orbitron mb-4">
+                <i data-lucide="cpu" class="text-cyan-400 w-6 h-6 mr-2"></i>
+                JAI TECH
+            </a>
+            <p class="my-6 text-gray-500">Forging the future, one byte at a time.</p>
+            <ul class="flex flex-wrap justify-center items-center mb-6 text-white">
+                <li>
+                    <a href="#" class="mr-4 hover:text-cyan-400 md:mr-6 transition-colors">About</a>
+                </li>
+                <li>
+                    <a href="#" class="mr-4 hover:text-cyan-400 md:mr-6 transition-colors">Premium</a>
+                </li>
+                <li>
+                    <a href="#" class="mr-4 hover:text-cyan-400 md:mr-6 transition-colors">Licensing</a>
+                </li>
+                <li>
+                    <a href="#" class="hover:text-cyan-400 transition-colors">Contact</a>
+                </li>
+            </ul>
+            <span class="text-sm text-gray-500 sm:text-center">© 2025 <a href="#" class="hover:underline text-cyan-500">JAI TECH™</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-slate-900 border border-cyan-500/50 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 transition-opacity duration-300 opacity-0 translate-y-10" role="alert">
+        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-cyan-500 bg-cyan-100/10 rounded-lg dark:bg-cyan-800 dark:text-cyan-200">
+            <i data-lucide="check" class="w-5 h-5"></i>
+        </div>
+        <div class="ml-3 text-sm font-normal text-white">Transmission Sent Successfully.</div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const navMenu = document.getElementById('navbar-default');
+
+        menuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navMenu.classList.add('hidden'); // Close mobile menu on click
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Toast Function
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('opacity-0', 'translate-y-10');
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-10');
+            }, 3000);
+            
+            // Clear form
+            document.querySelector('form').reset();
+        }
+
+        /**
+         * CANVAS BACKGROUND ANIMATION
+         * Creates a network of connected particles
+         */
+        const canvas = document.getElementById('neural-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let particles = [];
+        
+        // Configuration
+        const particleCount = 60; // Number of dots
+        const connectionDistance = 150; // Max distance to draw line
+        const mouseDistance = 200; // Mouse interaction radius
+
+        // Mouse tracking
+        let mouse = { x: null, y: null };
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.x;
+            mouse.y = e.y;
+        });
+        window.addEventListener('mouseout', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        // Resize handler
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerWidth;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.5; // Velocity X
+                this.vy = (Math.random() - 0.5) * 0.5; // Velocity Y
+                this.size = Math.random() * 2 + 1;
+                this.color = Math.random() > 0.5 ? '#22d3ee' : '#d946ef'; // Cyan or Fuchsia
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Bounce off edges
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+
+                // Mouse interaction
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < mouseDistance) {
+                        const forceDirectionX = dx / distance;
+                        const forceDirectionY = dy / distance;
+                        const force = (mouseDistance - distance) / mouseDistance;
+                        const directionX = forceDirectionX * force * 0.6;
+                        const directionY = forceDirectionY * force * 0.6;
+                        
+                        this.vx += directionX; // Gentle push/pull
+                        this.vy += directionY;
+                    }
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
+            
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Draw connections
+                for (let j = i; j < particles.length; j++) {
+                    let dx = particles[i].x - particles[j].x;
+                    let dy = particles[i].y - particles[j].y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        // Opacity based on distance
+                        let opacity = 1 - (distance / connectionDistance);
+                        ctx.strokeStyle = 'rgba(100, 116, 139, ' + opacity * 0.2 + ')'; 
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        initParticles();
+        animate();
+
+    </script>
+</body>
+</html>
