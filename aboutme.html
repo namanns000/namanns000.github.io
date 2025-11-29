@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naman | namanns.com</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#4f46e5', // Indigo-600
+                        'secondary': '#1f2937', // Gray-800
+                        'background': '#0f172a', // Slate-900
+                        'text-light': '#f8fafc', // Slate-50
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a; /* Slate-900 */
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: #4f46e5;
+            margin-top: 8px;
+            border-radius: 9999px;
+        }
+        /* Style for the star background canvas */
+        #star-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Ensure canvas is behind all content */
+        }
+    </style>
+</head>
+<body class="text-text-light antialiased">
+    <!-- Canvas for the star field background -->
+    <canvas id="star-background"></canvas>
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-background/90 backdrop-blur-sm shadow-lg">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-primary hover:text-white transition duration-300">
+                Naman Singh Yadav
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="text-base font-medium hover:text-primary transition duration-300">About</a>
+                <a href="#skills" class="text-base font-medium hover:text-primary transition duration-300">Skills</a>
+                <a href="#projects" class="text-base font-medium hover:text-primary transition duration-300">Projects</a>
+                <a href="#contact" class="text-base font-medium hover:text-primary transition duration-300">Contact</a>
+            </div>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-secondary transition duration-300">
+                <svg class="w-6 h-6 text-text-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-secondary w-full">
+            <a href="#about" class="block px-4 py-2 text-text-light hover:bg-primary/30 transition duration-300" onclick="closeMenu()">About</a>
+            <a href="#skills" class="block px-4 py-2 text-text-light hover:bg-primary/30 transition duration-300" onclick="closeMenu()">Skills</a>
+            <a href="#projects" class="block px-4 py-2 text-text-light hover:bg-primary/30 transition duration-300" onclick="closeMenu()">Projects</a>
+            <a href="#contact" class="block px-4 py-2 text-text-light hover:bg-primary/30 transition duration-300" onclick="closeMenu()">Contact</a>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <!-- Home/Hero Section -->
+        <section id="home" class="min-h-[80vh] flex items-center pt-24 pb-12">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <p class="text-xl text-primary font-semibold">you know who i am</p>
+                    <h1 class="text-6xl sm:text-7xl font-extrabold leading-tight">Naman</h1>
+                    <h2 class="text-3xl sm:text-4xl text-gray-300 font-light">
+                        Developer & <span class="text-primary font-medium">Entrepreneur</span>
+                    </h2>
+                    <p class="text-lg text-gray-400 max-w-xl">
+                        I build responsive, high-performance web applications and design compelling digital experiences. Let's create something impactful.
+                    </p>
+                    <a href="#contact" class="inline-block px-8 py-3 mt-4 text-lg font-bold text-white bg-primary rounded-full shadow-lg hover:bg-indigo-700 transition duration-300 transform hover:scale-105">
+                        Get In Touch
+                    </a>
+                </div>
+                <!-- Placeholder for a Profile Image (using placeholder.co) -->
+                <div class="order-first md:order-last flex justify-center">
+                    <img src="IMG1.JPG" 
+                         alt="Jane Doe Profile" 
+                         class="w-88 h-88 md:w-100 md:h-100 object-cover rounded-full border-4 border-primary shadow-2xl transition duration-500 hover:shadow-primary/50"
+                         onerror="this.onerror=null; this.src='https://placehold.co/400x400/1f2937/4f46e5?text=N'"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20">
+            <h3 class="section-title text-4xl font-bold mb-12">About Me</h3>
+            <div class="bg-secondary p-8 rounded-xl shadow-xl space-y-6">
+                <p class="text-lg text-gray-300">
+                    I'm an Engineer, Business, Developer. My journey began with a curiosity to make apps and softwares for myself, which quickly evolved into a career focused on building scalable, accessible, and user-friendly digital products.
+                </p>
+                <p class="text-lg text-gray-300">
+                    I believe that the best solutions come from a blend of technical excellence and strategic thinking. In my spare time, I enjoy exploring new business ideas.
+                </p>
+                <a href="#projects" class="text-primary font-semibold hover:underline">
+                    See my work &rarr;
+                </a>
+            </div>
+        </section>
+
+        <!-- Skills & Experience Section -->
+        <section id="skills" class="py-20">
+            <h3 class="section-title text-4xl font-bold mb-12">Education and skills</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <!-- Skill Card -->
+                <div class="bg-secondary p-4 rounded-lg text-center shadow-lg hover:shadow-primary/50 transition duration-300 transform hover:-translate-y-1">
+                    <p class="text-xl font-semibold">B.TECH</p>
+                    <p class="text-sm text-gray-400">Electrical | MMMUT</p>
+                </div>
+              
+    
+                <div class="bg-secondary p-4 rounded-lg text-center shadow-lg hover:shadow-primary/50 transition duration-300 transform hover:-translate-y-1">
+                    <p class="text-xl font-semibold">Tailwind CSS</p>
+                    <p class="text-sm text-gray-400">Styling</p>
+                </div>
+                <div class="bg-secondary p-4 rounded-lg text-center shadow-lg hover:shadow-primary/50 transition duration-300 transform hover:-translate-y-1">
+                    <p class="text-xl font-semibold">Figma</p>
+                    <p class="text-sm text-gray-400">Design</p>
+                </div>
+                <div class="bg-secondary p-4 rounded-lg text-center shadow-lg hover:shadow-primary/50 transition duration-300 transform hover:-translate-y-1">
+                    <p class="text-xl font-semibold">Firestore</p>
+                    <p class="text-sm text-gray-400">Database</p>
+                </div>
+            </div>
+
+            <!-- Detailed Experience (Optional - Example) -->
+            <h4 class="text-3xl font-semibold mt-16 mb-8 text-gray-200">Key Experience</h4>
+            <div class="space-y-8">
+                <div class="border-l-4 border-primary pl-6 py-2 bg-secondary/50 rounded-r-lg">
+                    <h5 class="text-2xl font-semibold text-primary">Founder</h5>
+                    <p class="text-lg text-white">JAI TECH | 2025</p>
+                    <p class="text-gray-400">Built a retail chain consumer elctronics and technology company.</p>
+                </div>
+                <div class="border-l-4 border-primary pl-6 py-2 bg-secondary/50 rounded-r-lg">
+                    <h5 class="text-2xl font-semibold text-primary">Founder</h5>
+                    <p class="text-lg text-white">JAI OCTOBER | 2023</p>
+                    <p class="text-gray-400">Started a construction company</p>
+                </div>
+                <div class="border-l-4 border-primary pl-6 py-2 bg-secondary/50 rounded-r-lg">
+                    <h5 class="text-2xl font-semibold text-primary">Founder</h5>
+                    <p class="text-lg text-white">JAI INDUSTRIES | 2022</p>
+                    <p class="text-gray-400">Built a manufacturing company from scratch</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <h3 class="section-title text-4xl font-bold mb-12">Featured Projects</h3>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <!-- Project Card 1 (entire card links to index.html) -->
+                <a href="index.html">
+                    <div class="bg-secondary rounded-xl shadow-xl overflow-hidden hover:shadow-primary/70 transition duration-500">
+                        <img src="LOGO.png" alt="JAI TECH" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h4 class="text-2xl font-semibold text-primary mb-2">JAI TECH</h4>
+                            <p class="text-gray-400 mb-4">A tech company with chain of retail stores of consumer electronics + A.I. tech development.</p>
+                            <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full mr-2">Retail</span>
+                            <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full">technology</span>
+                            <span class="mt-4 block text-white font-semibold group-hover:text-primary">View Details &rarr;</span>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project Card 2 -->
+                <div class="bg-secondary rounded-xl shadow-xl overflow-hidden hover:shadow-primary/70 transition duration-500">
+                    <img src="https://placehold.co/600x400/22c55e/ffffff?text=JAI OCTOBER" alt="Project B Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-primary mb-2">JAI OCTOBER</h4>
+                        <p class="text-gray-400 mb-4">Real estate company that aims at Constructing and selling residential houses and related projects.</p>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full mr-2">real-estate</span>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full">construction</span>
+                        <a href="#" class="mt-4 block text-white font-semibold hover:text-primary transition duration-300">View Details &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-secondary rounded-xl shadow-xl overflow-hidden hover:shadow-primary/70 transition duration-500">
+                    <img src="https://placehold.co/600x400/eab308/ffffff?text=JAI UNIVERSITY" alt="Project C Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-primary mb-2">JAI UNIVERSITY</h4>
+                        <p class="text-gray-400 mb-4">Aim is to establish a proper university of engineering and medical fields alinged with present day demands of the society.</p>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full mr-2">University/ college</span>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full">medical</span>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full">engineering</span>
+
+                        <a href="#" class="mt-4 block text-white font-semibold hover:text-primary transition duration-300">View Details &rarr;</a>
+                    </div>
+                </div>
+
+                 <!-- Project Card 4 -->
+                <div class="bg-secondary rounded-xl shadow-xl overflow-hidden hover:shadow-primary/70 transition duration-500">
+                    <img src="https://placehold.co/600x400/d9d96a/ffffff?text=JAI INDUSTRIES" alt="Project C Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-primary mb-2">JAI INDUSTRIES</h4>
+                        <p class="text-gray-400 mb-4">A manufacturing company started in 2022, currently inactive, searching for a new product to manufacture.</p>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full mr-2">manufacturing</span>
+                        <a href="#" class="mt-4 block text-white font-semibold hover:text-primary transition duration-300">View Details &rarr;</a>
+                    </div>
+                </div>
+
+                 <!-- Project Card 5 -->
+                <div class="bg-secondary rounded-xl shadow-xl overflow-hidden hover:shadow-primary/70 transition duration-500">
+                    <img src="https://placehold.co/600x400/5b6e64/ffffff?text=JAI HOTELS" alt="Project C Screenshot" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h4 class="text-2xl font-semibold text-primary mb-2">JAI HOTELS</h4>
+                        <p class="text-gray-400 mb-4">A luxury hotel chain.</p>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full mr-2">hotels</span>
+                        <span class="inline-block bg-primary/20 text-primary text-xs font-medium px-3 py-1 rounded-full">resorts</span>
+                        <a href="#" class="mt-4 block text-white font-semibold hover:text-primary transition duration-300">View Details &rarr;</a>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <h3 class="section-title text-4xl font-bold mb-12">Contact Me</h3>
+            <div class="bg-secondary p-8 rounded-xl shadow-xl max-w-2xl mx-auto">
+                <p class="text-lg text-gray-300 mb-6 text-center">
+                    I'm currently available for projects and new opportunities.
+                </p>
+                
+                <!-- Simple Contact Form Mockup -->
+                <form id="contact-form" class="space-y-4">
+                    <div>
+                        <label for="name" class="block text-sm font-medium text-gray-300">Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full px-4 py-2 bg-background border border-gray-700 rounded-md text-text-light focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-2 bg-background border border-gray-700 rounded-md text-text-light focus:ring-primary focus:border-primary">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
+                        <textarea id="message" name="message" rows="4" required class="mt-1 block w-full px-4 py-2 bg-background border border-gray-700 rounded-md text-text-light focus:ring-primary focus:border-primary"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3 text-lg font-bold text-white bg-primary rounded-md shadow-md hover:bg-indigo-700 transition duration-300">
+                        Send Message
+                    </button>
+                    <p id="form-message" class="text-center pt-4 hidden"></p>
+                </form>
+            </div>
+            <!-- MANDATORY: User ID Display -->
+            <div class="mt-8 text-center text-sm text-gray-500">
+                <p id="user-id-display">contact me is not active yet.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-secondary py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-400 space-y-4">
+            <p>&copy; 2025 namanns.com . All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase and Application Logic -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, setDoc, doc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Enable Firebase debug logging
+        setLogLevel('Debug');
+
+        // Global variables provided by the environment
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : null;
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let app;
+        let db;
+        let auth;
+        let userId;
+
+        // --- Canvas Star Field Logic ---
+        let canvas;
+        let ctx;
+        let stars = [];
+        const STAR_COUNT = 200;
+        let mouseX = window.innerWidth / 2;
+        let mouseY = window.innerHeight / 2;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Star {
+            constructor() {
+                this.x = Math.random() * window.innerWidth;
+                this.y = Math.random() * window.innerHeight;
+                this.radius = Math.random() * 1.5 + 0.5; // Size 0.5 to 2.0
+                this.originalOpacity = Math.random() * 0.7 + 0.3;
+                this.opacity = this.originalOpacity;
+                this.velocity = this.radius / 1.5 * 0.002 + 0.001; // Speed relative to size
+                this.angle = Math.random() * Math.PI * 2;
+                this.z = Math.random() * 20 + 1; // Used for parallax depth
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.fill();
+            }
+
+            update() {
+                // Subtle random twinkle (opacity modulation)
+                this.opacity = this.originalOpacity + Math.sin(Date.now() * this.velocity * 100) * 0.4;
+                if (this.opacity < 0.1) this.opacity = 0.1;
+
+                // Base movement (slow drift)
+                this.x += Math.cos(this.angle) * this.velocity * 1;
+                this.y += Math.sin(this.angle) * this.velocity * 1;
+
+                // Wrap around edges
+                if (this.x < 0) this.x = window.innerWidth;
+                if (this.x > window.innerWidth) this.x = 0;
+                if (this.y < 0) this.y = window.innerHeight;
+                if (this.y > window.innerHeight) this.y = 0;
+
+                // Mouse interaction: Parallax effect (stars shift based on mouse position from center)
+                const dxFromCenter = mouseX - window.innerWidth / 2;
+                const dyFromCenter = mouseY - window.innerHeight / 2;
+
+                // Parallax adjustment: further stars (larger z) move more.
+                const parallaxFactor = 0.01;
+                this.x += (dxFromCenter / this.z) * parallaxFactor;
+                this.y += (dyFromCenter / this.z) * parallaxFactor;
+
+                this.draw();
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < STAR_COUNT; i++) {
+                stars.push(new Star());
+            }
+        }
+
+        function animateStars() {
+            // Clear the canvas for the next frame
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => star.update());
+            requestAnimationFrame(animateStars);
+        }
+
+        function startStarField() {
+            canvas = document.getElementById('star-background');
+            if (canvas) {
+                ctx = canvas.getContext('2d');
+                window.addEventListener('resize', resizeCanvas);
+                
+                // Mouse position listener for interactivity
+                document.addEventListener('mousemove', (event) => {
+                    mouseX = event.clientX;
+                    mouseY = event.clientY;
+                });
+
+                resizeCanvas();
+                initStars();
+                animateStars();
+            }
+        }
+
+        // --- Firebase Functions (Unchanged) ---
+
+        /**
+         * Initializes Firebase and authenticates the user.
+         */
+        async function initializeFirebase() {
+            if (!firebaseConfig) {
+                console.error("Firebase configuration is missing. Cannot initialize Firestore.");
+                return;
+            }
+            try {
+                app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Sign in using custom token or anonymously
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    // Fallback to anonymous sign-in if token is not available
+                    await signInAnonymously(auth);
+                }
+
+                userId = auth.currentUser?.uid || 'anonymous-user';
+                console.log("Firebase initialized. User ID:", userId);
+
+                // Display userId on the page (MANDATORY)
+                const userIdElement = document.getElementById('user-id-display');
+                if (userIdElement) {
+                    userIdElement.textContent = `User ID: ${userId}`;
+                }
+
+            } catch (error) {
+                console.error("Error initializing Firebase:", error);
+            }
+        }
+
+        /**
+         * Handles the contact form submission.
+         */
+        async function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const messageElement = document.getElementById('form-message');
+            
+            const name = form.name.value.trim();
+            const email = form.email.value.trim();
+            const message = form.message.value.trim();
+
+            messageElement.classList.add('hidden');
+            messageElement.classList.remove('text-red-400', 'text-green-400');
+            messageElement.textContent = '';
+            
+            if (!name || !email || !message) {
+                messageElement.textContent = 'Please fill out all fields.';
+                messageElement.classList.add('text-red-400');
+                messageElement.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                if (db && userId) {
+                    const submissionData = {
+                        name: name,
+                        email: email,
+                        message: message,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    // Saving the contact message to a private collection in Firestore
+                    const submissionId = Date.now().toString(); // Simple unique ID
+                    const path = `artifacts/${appId}/users/${userId}/contact_submissions`;
+                    
+                    // Using setDoc to create a document in the contact_submissions collection
+                    await setDoc(doc(db, path, submissionId), submissionData);
+
+                    messageElement.textContent = 'Message sent successfully! (Saved to Firestore)';
+                    messageElement.classList.add('text-green-400');
+                    form.reset();
+                } else {
+                    console.warn("Firebase not ready. Data logged to console instead of Firestore.");
+                    messageElement.textContent = 'Message submitted! (Check console for data)';
+                    messageElement.classList.add('text-green-400');
+                    form.reset();
+                }
+            } catch (error) {
+                console.error("Error submitting contact form:", error);
+                messageElement.textContent = 'An error occurred. Please try again later.';
+                messageElement.classList.add('text-red-400');
+            } finally {
+                 messageElement.classList.remove('hidden');
+            }
+        }
+
+        /**
+         * Toggles the mobile navigation menu visibility.
+         */
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        /**
+         * Closes the mobile navigation menu after a link is clicked.
+         */
+        function closeMenu() {
+             const menu = document.getElementById('mobile-menu');
+             if (!menu.classList.contains('hidden')) {
+                 menu.classList.add('hidden');
+             }
+        }
+
+        // --- Main Execution Block ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start the interactive star background
+            startStarField(); 
+            
+            // Initialize Firebase services
+            initializeFirebase();
+            
+            // Attach event listener for mobile menu
+            const menuButton = document.getElementById('mobile-menu-button');
+            if (menuButton) {
+                menuButton.addEventListener('click', toggleMenu);
+            }
+            
+            // Attach event listener for contact form
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', handleContactSubmit);
+            }
+        });
+    </script>
+</body>
+</html>
