@@ -1,0 +1,51 @@
+:root{
+  --bg:#0f1720; --panel:#11161d; --accent:#1db954; --muted:#9aa4b2; --glass:rgba(255,255,255,0.04);
+}
+:root.light{
+  --bg:#f6f8fa; --panel:#ffffff; --accent:#1db954; --muted:#51626a; --glass:rgba(0,0,0,0.04); color-scheme:light;
+}
+*{box-sizing:border-box;font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial}
+html,body,#app{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#071018);color:#e6eef6}
+.container{max-width:1100px;margin:18px auto;padding:18px}
+header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+header h1{font-size:1.1rem;margin:0}
+.controls-row{display:flex;gap:8px;align-items:center}
+input[type=file]{color:transparent}
+button{background:var(--panel);border:1px solid rgba(255,255,255,0.03);color:var(--muted);padding:8px 10px;border-radius:6px}
+main{display:flex;gap:16px}
+.player{flex:2;background:var(--panel);padding:16px;border-radius:10px}
+.playlist{flex:1;background:var(--panel);padding:12px;border-radius:10px;max-height:70vh;overflow:auto}
+.playlist-manage{display:flex;flex-direction:column;gap:6px;margin-bottom:8px}
+.playlist-manage input{padding:6px;border-radius:6px;border:1px solid rgba(0,0,0,0.06)}
+.playlist-manage button{padding:6px}
+.now-playing{display:flex;gap:12px;align-items:center}
+#cover{width:96px;height:96px;background:var(--glass);border-radius:6px;object-fit:cover}
+.meta{line-height:1}
+.meta #title{font-weight:700}
+.transport{margin-top:12px}
+.buttons{display:flex;gap:8px}
+.seek-row{display:flex;align-items:center;gap:8px;margin-top:8px}
+#seek{flex:1}
+.misc{display:flex;gap:12px;align-items:center;margin-top:8px}
+#visualizer{width:100%;height:120px;margin-top:12px;background:linear-gradient(180deg, transparent, rgba(255,255,255,0.02));border-radius:6px}
+.eq-panel{margin-top:12px;padding:8px;background:rgba(255,255,255,0.02);border-radius:6px}
+.eq-sliders{display:flex;gap:8px;align-items:flex-end;height:120px}
+.eq-sliders input{writing-mode:bt-lr;transform:rotate(-90deg);width:100px}
+#playlist{list-style:none;padding:0;margin:0}
+#playlist li{padding:8px;border-bottom:1px solid rgba(255,255,255,0.02);cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+#playlist li.active{background:linear-gradient(90deg,rgba(255,255,255,0.02),transparent)}
+.pl-title{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pl-actions{display:flex;gap:4px}
+.pl-actions button{padding:2px 4px;font-size:0.8rem}
+#savedPlaylists{list-style:none;padding:0;margin:0 0 8px 0}
+#savedPlaylists li{display:flex;gap:8px;align-items:center;padding:6px;border:1px solid rgba(0,0,0,0.04);border-radius:6px}
+#savedPlaylists button{padding:4px 6px}
+footer{margin-top:12px;color:var(--muted)}
+
+@media (max-width:800px){main{flex-direction:column}.playlist{max-height:none}}
+
+/* theme toggle button */
+#themeToggle{background:transparent;border:1px solid rgba(255,255,255,0.03);padding:6px;border-radius:6px}
+
+button:focus{outline:2px solid var(--accent);outline-offset:2px}
+input:focus{outline:2px solid var(--accent);outline-offset:2px}
