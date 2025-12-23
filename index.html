@@ -93,9 +93,6 @@
                     <li>
                         <a href="#tech" class="block py-2 px-3 text-gray-300 rounded hover:bg-white/10 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 transition-colors">Technology</a>
                     </li>
-                    <li>
-                        <a href="#contact" class="block py-2 px-3 text-gray-300 rounded hover:bg-white/10 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 transition-colors">Contact</a>
-                    </li>
                       <li>
                         <a href="aboutme.html" class="block py-2 px-3 text-gray-300 rounded hover:bg-white/10 md:hover:bg-transparent md:border-0 md:hover:text-cyan-400 md:p-0 transition-colors">About me</a>
                     </li>
@@ -251,30 +248,6 @@
         </div>
     </section>
 
-    <!-- Contact CTA -->
-    <section id="contact" class="bg-slate-1000 relative py-24">
-        <div class="py-8 px-4 mx-auto max-w-screen-xl sm:py-16 lg:px-6 relative z-10">
-            <div class="mx-auto max-w-screen-sm text-center">
-                <h2 class="mb-4 text-4xl tracking-tight font-extrabold leading-tight text-white font-orbitron">Initialize <span class="text-cyan-400">Connection</span></h2>
-                <p class="mb-6 font-light text-gray-400 md:text-lg">Ready to upgrade your reality? Send a transmission to our team.</p>
-                <form action="#" class="space-y-4 text-left p-6 border border-white/10 rounded-2xl bg-slate-900/80 backdrop-blur-xl shadow-2xl" onsubmit="event.preventDefault(); showToast();">
-                    <div>
-                        <label for="email" class="block mb-2 text-sm font-medium text-gray-300">Identity (Email)</label>
-                        <input type="email" id="email" class="shadow-sm bg-slate-950 border border-gray-700 text-white text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 placeholder-gray-600" placeholder="user@jaitech.com" required>
-                    </div>
-                    <div>
-                        <label for="subject" class="block mb-2 text-sm font-medium text-gray-300">Subject</label>
-                        <input type="text" id="subject" class="shadow-sm bg-slate-950 border border-gray-700 text-white text-sm rounded-lg focus:ring-cyan-500 focus:border-cyan-500 block w-full p-2.5 placeholder-gray-600" placeholder="Project Inquiry" required>
-                    </div>
-                    <div class="sm:col-span-2">
-                        <label for="message" class="block mb-2 text-sm font-medium text-gray-300">Transmission</label>
-                        <textarea id="message" rows="4" class="block p-2.5 w-full text-sm text-white bg-slate-950 rounded-lg shadow-sm border border-gray-700 focus:ring-cyan-500 focus:border-cyan-500 placeholder-gray-600" placeholder="Enter your message..."></textarea>
-                    </div>
-                    <button type="submit" class="py-3 px-5 w-full text-sm font-medium text-center text-slate-950 font-bold rounded-lg bg-gradient-to-r from-cyan-400 to-cyan-600 hover:from-cyan-300 hover:to-cyan-500 focus:ring-4 focus:outline-none focus:ring-cyan-300 transition-all">Send Transmission</button>
-                </form>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="p-4 bg-slate-950 md:p-8 lg:p-10 border-t border-white/10">
@@ -283,18 +256,14 @@
                 <i data-lucide="cpu" class="text-cyan-400 w-6 h-6 mr-2"></i>
                 JAI TECH
             </a>
+
+            <a class="flex justify-center items-center font-semibold text-grey-500"> jaitech0000@gmail.com </a>
          
             <span class="text-sm text-gray-500 sm:text-center">© 2025 <a href="#" class="hover:underline text-cyan-500">JAI TECH™</a>. All Rights Reserved.</span>
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 flex items-center w-full max-w-xs p-4 space-x-4 text-gray-500 bg-slate-900 border border-cyan-500/50 rounded-lg shadow dark:text-gray-400 dark:bg-gray-800 transition-opacity duration-300 opacity-0 translate-y-10" role="alert">
-        <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-cyan-500 bg-cyan-100/10 rounded-lg dark:bg-cyan-800 dark:text-cyan-200">
-            <i data-lucide="check" class="w-5 h-5"></i>
-        </div>
-        <div class="ml-3 text-sm font-normal text-white">Transmission Sent Successfully.</div>
-    </div>
+
 
     <script>
         // Initialize Icons
